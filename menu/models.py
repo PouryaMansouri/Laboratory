@@ -6,7 +6,7 @@ from core.models import BaseModel
 class Node:
     def __init__(self, parent=None) -> None:
         self.children = []
-        assert parent is Node or isinstance(parent, Node)  # parent must be node
+        assert parent is None or isinstance(parent, Node)  # parent must be node
         self.parent = parent
         if parent:
             self.parent.children.append(self)
@@ -19,7 +19,7 @@ class Menu(ABC, Node):
         self.description = description
 
     def __repr__(self):
-        return f"This is a {self.name}  menu \n{self.description}"
+        return f"{self.name}\n{self.description}"
 
 
 class MenuList(Menu):
@@ -28,5 +28,5 @@ class MenuList(Menu):
         print(f'{self.description}')
         print("\nMenu items:")
         for id_menu, sub_menu in enumerate(self.children):
-            print(f"\t{id_menu}- {repr(sub_menu)}")
+            print(f"\t{id_menu+1}.{repr(sub_menu)}",end="")
 
