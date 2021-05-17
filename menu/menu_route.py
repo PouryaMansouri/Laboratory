@@ -22,7 +22,8 @@ menu_dict = {
             "description": "Test list",
             "children": [{
                 "name": "Corona Test",
-                "description": "corona test"
+                "description": "corona test",
+                "children": []
             }]
 
         }

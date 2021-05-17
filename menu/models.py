@@ -28,5 +28,5 @@ class MenuList(Menu):
         print(f'{self.description}')
         print("\nMenu items:")
         for id_menu, sub_menu in enumerate(self.children):
-            print(f"\t{id_menu+1}.{repr(sub_menu)}",end="")
+            print(f"\t{id_menu+1}.{repr(sub_menu)}")
 
