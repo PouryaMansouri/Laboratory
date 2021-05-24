@@ -1,5 +1,6 @@
 from abc import ABC
 
+from user.views import login
 from utilitis.get_input import get_input
 
 
@@ -22,7 +23,7 @@ class Menu(ABC, Node):
         pass
 
     def get_input(self, prompt, validator):
-        return get_input(prompt,validator)
+        return get_input(prompt, validator)
 
     def __repr__(self):
         return f"{self.name}\n{self.description}"
@@ -52,3 +53,16 @@ class MenuList(Menu):
             exit(0)
         else:
             next_menu()
+
+
+class MenuView(Menu):
+    def __init__(self, function, name, parent=None, description=""):
+        super().__init__(name, parent, description)
+        self.function = function
+
+    def __call__(self, *args, **kwargs):
+        self.function(*args,**kwargs)
+        # print("call Done")
+
+# test = MenuView(login,"login")
+# test()
