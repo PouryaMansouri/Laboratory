@@ -22,7 +22,7 @@ class Menu(ABC, Node):
         pass
 
     def get_input(self, prompt, validator):
-        return get_input(prompt, type_to_return=validator)
+        return get_input(prompt,validator)
 
     def __repr__(self):
         return f"{self.name}\n{self.description}"
@@ -45,7 +45,7 @@ class MenuList(Menu):
                     if child.name.strip().casefold == s.strip().casefold():
                         return child
 
-        prompt = f"\nSelect next menu (0 to {'return' if self.parent else 'exit'})"
+        prompt = f"\nSelect next menu (0 to {'return' if self.parent else 'exit'}):"
         # next_menu = self.get_input(prompt)
         next_menu = self.get_input(prompt, validator=validator)
         if not next_menu:

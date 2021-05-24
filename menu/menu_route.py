@@ -10,7 +10,14 @@ menu_dict = {
         {
             "name": "Login",
             "description": "you need login to access",
-            "children": []
+            "children": [
+                {
+                    "name": "login2",
+                    "description": "you need login to access",
+                    "children": []
+
+                }
+            ]
         },
         {
             "name": "Patients List",

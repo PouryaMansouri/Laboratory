@@ -11,5 +11,5 @@ def generate_menu(menu_dict: dict, parent=None) -> Menu:
         raise Exception("wrong")
     return menu
 
-print(menu_dict)
+# print(menu_dict)
 main_menu = generate_menu(menu_dict=menu_dict)
