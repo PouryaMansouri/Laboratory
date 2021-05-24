@@ -5,22 +5,23 @@ import os
 
 
 class BaseUser(BaseModel, ABC):
-    __count: int = 1
-    __name_path: str
-    __list: list = []
+    count: int = 1
+    name_path: str
+    list: list = []
 
     def __init__(self):
-        self.id = self.__class__.__count
-        self.__class__.__count += 1
-        self.__name_path = self.__class__.__name__.capitalize() + ".pkl"
 
-        if os.path.exists(self.__name_path):
-            if os.stat(self.__name_path).st_size:
-                pickle_in = open(self.__name_path, "rb")
-                self.__class__.__list = pickle.load(pickle_in)
-                print("asdasd")
+        self.name_path = self.__class__.__name__.capitalize() + ".pkl"
+
+        if os.path.exists(self.name_path):
+            if os.stat(self.name_path).st_size:
+                pickle_in = open(self.name_path, "rb")
+                self.__class__.list = pickle.load(pickle_in)
+                self.__class__.count = self.__class__.list[-1].id + 1
         else:
-            open(self.__name_path, "wb").close()
+            open(self.name_path, "wb").close()
+        self.id = self.__class__.count
+        self.__class__.count += 1
 
     @abstractmethod
     def create(self):
@@ -28,6 +29,10 @@ class BaseUser(BaseModel, ABC):
 
     @abstractmethod
     def save(self):
+        pass
+
+    @abstractmethod
+    def read_all(self):
         pass
 
 
@@ -46,7 +51,18 @@ class Patient(BaseUser):
         self.phone = input("phone: ")
 
     def save(self):
-        pass
+        self.__class__.list.append(self)
+        with open(self.name_path, "wb") as f:
+            pickle.dump(self.__class__.list, f)
+
+    def read_all(self):
+        with open(self.name_path, "rb") as f:
+            unpickle = pickle.load(f)
+        for _ in unpickle:
+            print(_)
+
+    def __repr__(self):
+        return f"{self.id}.{self.first_name} {self.last_name}\nphone: {self.phone}"
 
 
 #
@@ -58,3 +74,6 @@ class Patient(BaseUser):
 
 p = Patient()
 print(p.id)
+p.create()
+p.save()
+p.read_all()
