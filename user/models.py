@@ -8,9 +8,14 @@ class BaseUser(BaseModel, ABC):
     count: int = 1
     name_path: str
     list: list = []
+    first_name: str
+    last_name: str
+    phone: str
 
     def __init__(self):
-
+        self.first_name = ""
+        self.last_name = ""
+        self.phone = ""
         self.name_path = self.__class__.__name__.capitalize() + ".pkl"
 
         if os.path.exists(self.name_path):
@@ -53,8 +58,6 @@ class Patient(BaseUser):
         self.last_name = input("last_name: ")
         self.phone = input("phone: ")
 
-
-
     def __repr__(self):
         return f"{self.id}.{self.first_name} {self.last_name}\nphone: {self.phone}"
 
@@ -65,9 +68,9 @@ class Patient(BaseUser):
 #     def __init__(self):
 #         super().__init__()
 
-
-p = Patient()
-print(p.id)
-p.create()
-p.save()
-p.read_all()
+if __name__ == '__main__':
+    p = Patient()
+    print(p.id)
+    p.create()
+    p.save()
+    p.read_all()
