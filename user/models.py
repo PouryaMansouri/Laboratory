@@ -27,13 +27,16 @@ class BaseUser(BaseModel, ABC):
     def create(self):
         pass
 
-    @abstractmethod
     def save(self):
-        pass
+        self.__class__.list.append(self)
+        with open(self.name_path, "wb") as f:
+            pickle.dump(self.__class__.list, f)
 
-    @abstractmethod
     def read_all(self):
-        pass
+        with open(self.name_path, "rb") as f:
+            unpickle = pickle.load(f)
+        for _ in unpickle:
+            print(_)
 
 
 # class Doctor(BaseUser):
@@ -50,16 +53,7 @@ class Patient(BaseUser):
         self.last_name = input("last_name: ")
         self.phone = input("phone: ")
 
-    def save(self):
-        self.__class__.list.append(self)
-        with open(self.name_path, "wb") as f:
-            pickle.dump(self.__class__.list, f)
 
-    def read_all(self):
-        with open(self.name_path, "rb") as f:
-            unpickle = pickle.load(f)
-        for _ in unpickle:
-            print(_)
 
     def __repr__(self):
         return f"{self.id}.{self.first_name} {self.last_name}\nphone: {self.phone}"
