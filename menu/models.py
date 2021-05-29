@@ -61,8 +61,9 @@ class MenuView(Menu):
         self.function = function
 
     def __call__(self, *args, **kwargs):
-        self.function(*args,**kwargs)
-        # print("call Done")
+        self.function(*args, **kwargs)
 
-# test = MenuView(login,"login")
-# test()
+        if self.parent:
+            self.parent()
+        else:
+            exit()

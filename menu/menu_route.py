@@ -1,24 +1,27 @@
+from user.views import login, register
+
 menu_dict = {
     "name": "Laboratory Main Menu",
     "description": "Group 3 laboratory project",
     "children": [
         {
-            "name": "Register",
+            "name": "Register/Login",
             "description": "FREE to registration",
-            "children": []
-        },
-        {
-            "name": "Login",
-            "description": "you need login to access",
-            "children": [
-                {
-                    "name": "login2",
-                    "description": "you need login to access",
-                    "children": []
+            "children": [{
+                "name": "Register",
+                "description": "FREE to registration",
+                "function": register,
 
-                }
-            ]
+            },
+                {
+                    "name": "Login",
+                    "description": "you need login to access",
+                    "function": login,
+
+                }, ]
+
         },
+
         {
             "name": "Patients List",
             "description": "show list of patients",

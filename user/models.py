@@ -71,6 +71,6 @@ class Patient(BaseUser):
 if __name__ == '__main__':
     p = Patient()
     print(p.id)
-    p.create()
-    p.save()
+    # p.create()
+    # p.save()
     p.read_all()
