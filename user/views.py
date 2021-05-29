@@ -28,13 +28,6 @@ def logout():
     pass
 
 
-class Test():
-    pass
-
-
-class CoronaTest(Test):
-    pass
-
 
 def corona_test_view() -> CoronaTest:
     # TODO: check login or register
