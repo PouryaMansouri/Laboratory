@@ -1,4 +1,5 @@
-from user.views import login, register
+from user.views.register import register
+from user.views.login import login
 
 menu_dict = {
     "name": "Laboratory Main Menu",

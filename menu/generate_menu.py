@@ -8,7 +8,8 @@ def generate_menu(menu_dict: dict, parent=None) -> Menu:
         for child in menu_dict["children"]:
             generate_menu(child, parent=menu)
     elif "function" in menu_dict:
-        menu = MenuView(menu_dict["name"], parent, description=menu_dict["description"])
+        menu = MenuView(menu_dict["name"], function=menu_dict["function"], parent=parent,
+                        description=menu_dict["description"])
     else:
         raise Exception("wrong")
     return menu

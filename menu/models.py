@@ -56,14 +56,35 @@ class MenuList(Menu):
 
 
 class MenuView(Menu):
-    def __init__(self, function, name, parent=None, description=""):
+    def __init__(self,  name,function, parent=None, description=""):
         super().__init__(name, parent, description)
         self.function = function
 
     def __call__(self, *args, **kwargs):
+        print(f'{self.parent.name} > {self.name}' if self.parent else self.name)
+        print(f'{self.description}')
+        print("\nMenu items:")
+        for id_menu, sub_menu in enumerate(self.children):
+            print(f"\t{id_menu + 1}.{repr(sub_menu)}")
+
+        def validator(s: str):
+            if s.isnumeric():
+                s = int(s)
+                return self.children[s - 1] if s else self.parent
+            else:
+                for child in self.children:
+                    if child.name.strip().casefold == s.strip().casefold():
+                        return child
+
         self.function(*args, **kwargs)
 
-        if self.parent:
-            self.parent()
+        prompt = f"\nSelect next menu (0 to {'return' if self.parent else 'exit'}):"
+        # next_menu = self.get_input(prompt)
+        next_menu = self.get_input(prompt, validator=validator)
+        if not next_menu:
+            exit(0)
         else:
-            exit()
+            next_menu()
+
+    def __repr__(self):
+        return f"{self.name}\n{self.description}"
