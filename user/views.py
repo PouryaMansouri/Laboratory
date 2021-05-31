@@ -1,3 +1,4 @@
+from tests.models import CoronaTest
 from user.models import Patient
 from typing import List
 
@@ -26,7 +27,6 @@ def register() -> Patient:
 
 def logout():
     pass
-
 
 
 def corona_test_view() -> CoronaTest:
