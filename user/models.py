@@ -1,5 +1,6 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 
+from core.managers import DBManager
 from core.models import BaseModel
 
 
@@ -26,6 +27,14 @@ class BaseUser(BaseModel, ABC):
 
     def __str__(self):
         return f"{self.username}: {self.first_name} {self.last_name}"
+
+    @classmethod
+    @abstractmethod
+    def manager(cls):
+        return DBManager
+
+    def to_dict(self):
+        return vars(self)
 
 
 class Patient(BaseUser):
