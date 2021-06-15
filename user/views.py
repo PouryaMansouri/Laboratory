@@ -9,7 +9,8 @@ def register_get():
 
 def register_post():
     data = request.form
-    p = Patient(fname=data['fname'], lname=data['lname'], phone=data['phone'], email=data['email'], passwd=data['passwd'])
+    p = Patient(fname=data['fname'], lname=data['lname'], phone=data['phone'], email=data['email'],
+                passwd=data['passwd'])
     return str(p)
 
 #
