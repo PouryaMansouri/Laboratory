@@ -28,16 +28,19 @@ class BaseUser(BaseModel, ABC):
     def __str__(self):
         return f"{self.username}: {self.first_name} {self.last_name}"
 
-    @classmethod
     @abstractmethod
-    def manager(cls):
-        return DBManager
+    def manager(self):
+        pass
 
     def to_dict(self):
         return vars(self)
 
 
 class Patient(BaseUser):
+
+    def manager(self) -> DBManager:
+        return DBManager(base_model=self, tb_name='persons')
+
     def __init__(self, fname: str, lname: str, phone: str, passwd: str, email: str = None, gender: str = None):
         super().__init__(fname, lname, phone, passwd, email, gender)
 

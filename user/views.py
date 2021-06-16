@@ -11,7 +11,8 @@ def register_post():
     data = request.form
     p = Patient(fname=data['fname'], lname=data['lname'], phone=data['phone'], email=data['email'],
                 passwd=data['passwd'])
-    return str(p)
+    id = p.manager().create()
+    return str(id)
 
 #
 # def login() -> bool:
