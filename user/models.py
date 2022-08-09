@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from core.managers import DBManager
+# from core.managers import DBManager
 from core.models import BaseModel
 
 
@@ -37,14 +37,14 @@ class BaseUser(BaseModel, ABC):
 
 
 class Patient(BaseUser):
+    pass 
+    # def manager(self) -> DBManager:
+    #     return DBManager(base_model=self, tb_name='persons')
 
-    def manager(self) -> DBManager:
-        return DBManager(base_model=self, tb_name='persons')
+    # def __init__(self, fname: str, lname: str, phone: str, passwd: str, email: str = None, gender: str = None):
+    #     super().__init__(fname, lname, phone, passwd, email, gender)
 
-    def __init__(self, fname: str, lname: str, phone: str, passwd: str, email: str = None, gender: str = None):
-        super().__init__(fname, lname, phone, passwd, email, gender)
-
-    #
+    # #
     #     def __init__(self):
     #         self.first_name = ""
     #         self.last_name = ""
